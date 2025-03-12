@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Close All Unpinned Tabs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Close all unpinned tabs with a short cut \"Alt + Shift + O\"",
   "background": {
     "service_worker": "background.js"
@@ -26,10 +26,16 @@
       "suggested_key": {
         "default": "Alt+Shift+O"
       },
-      "description": "Close all tabs excepts pinned ones"
+      "description": "Close all unpinned tabs in current window"
+    },
+    "close_all_unpinned": {
+      "suggested_key": {
+        "default": "Alt+Shift+I"
+      },
+      "description": "Close all unpinned tabs across all windows"
     }
   },
-  "permissions": ["tabs", "commands"],
+  "permissions": ["tabs"],
   "icons": {
     "16": "broom.png",
     "32": "broom.png",
