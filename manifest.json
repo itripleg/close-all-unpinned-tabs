@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Close All Unpinned Tabs",
+  "version": "1.0.0",
+  "description": "Close all unpinned tabs with a short cut \"Alt + Shift + O\"",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "broom.png",
+      "32": "broom.png",
+      "48": "broom.png",
+      "128": "broom128.png"
+    },
+    "default_title": "Clutter"
+  },
+  "commands": {
+    "toggle_pin": {
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
+      "description": "Toggle if the pin is tabbed"
+    },
+    "close_unpinned": {
+      "suggested_key": {
+        "default": "Alt+Shift+O"
+      },
+      "description": "Close all tabs excepts pinned ones"
+    }
+  },
+  "permissions": ["tabs"],
+  "icons": {
+    "16": "broom.png",
+    "32": "broom.png",
+    "48": "broom.png",
+    "128": "broom128.png"
+  }
+}
