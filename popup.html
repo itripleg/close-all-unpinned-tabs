@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
     <style>
       body {
         width: 300px;
@@ -53,13 +54,16 @@
         font-style: italic;
         color: #999;
       }
+      .note {
+        font-size: 11px;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
     <h1>Tab Manager Shortcuts</h1>
 
-    <div id="shortcut-container" class="shortcut-container">
-      <!-- Shortcuts will be populated here -->
+    <div id="shortcuts-container" class="shortcut-container">
       <div class="shortcut">
         <img src="broom.png" class="icon" alt="Loading..." />
         <span class="key-combo">Loading...</span>
@@ -67,7 +71,12 @@
       </div>
     </div>
 
-    <footer>Close All Unpinned Tabs v1.0.0</footer>
+    <div id="note" class="note">
+      Shortcus conflicting with other extensions?<br /><br />
+      Customize at: <b>chrome://extensions/shortcuts</b>
+    </div>
+
+    <footer id="footer">Close All Unpinned Tabs</footer>
 
     <script src="popup.js"></script>
   </body>

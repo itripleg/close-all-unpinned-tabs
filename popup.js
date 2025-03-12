@@ -1,82 +1,76 @@
-/**
- * Populate the popup with current keyboard shortcuts
- */
-document.addEventListener("DOMContentLoaded", async () => {
-  const shortcutContainer = document.getElementById("shortcut-container");
+// Wait for the DOM to be fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+  const shortcutsContainer = document.getElementById("shortcuts-container");
+  const footer = document.getElementById("footer");
 
-  // Clear loading placeholder
-  shortcutContainer.innerHTML = "";
+  // Clear loading state
+  shortcutsContainer.innerHTML = "";
 
+  // Get extension info
   try {
-    // Get all commands and their shortcuts
-    const commands = await chrome.commands.getAll();
+    const manifest = chrome.runtime.getManifest();
+    if (footer && manifest.version) {
+      footer.textContent = `${manifest.name} v${manifest.version}`;
+    }
+  } catch (err) {
+    console.error("Error getting manifest:", err);
+  }
 
-    // Define shortcut info with descriptions and icons
-    const shortcutInfo = {
-      toggle_pin: {
-        description: "Toggle pin status of current tab",
-        icon: "broom.png",
-      },
-      close_unpinned: {
-        description: "Close all unpinned tabs in current window",
-        icon: "broom.png",
-      },
-      close_all_unpinned: {
-        description: "Close all unpinned tabs across all windows",
-        icon: "broom.png",
-      },
-    };
+  // Shortcut definitions
+  const shortcuts = {
+    toggle_pin: {
+      description: "Toggle pin status of current tab",
+      icon: "broom.png",
+    },
+    close_unpinned: {
+      description: "Close all unpinned tabs in current window",
+      icon: "broom.png",
+    },
+    close_all_unpinned: {
+      description: "Close all unpinned tabs across all windows",
+      icon: "broom.png",
+    },
+  };
 
-    // Create elements for each command
-    commands.forEach((command) => {
-      // Skip the default "_execute_action" command
+  // Get and display commands
+  chrome.commands.getAll(function (commands) {
+    commands.forEach(function (command) {
+      // Skip _execute_action command
       if (command.name === "_execute_action") return;
 
-      const info = shortcutInfo[command.name] || {
-        description: command.description || "No description",
+      const shortcutInfo = shortcuts[command.name] || {
+        description: command.description || "Unknown command",
         icon: "broom.png",
       };
 
+      // Create shortcut element
       const shortcutDiv = document.createElement("div");
       shortcutDiv.className = "shortcut";
 
-      // Icon
+      // Add icon
       const icon = document.createElement("img");
-      icon.src = info.icon;
+      icon.src = shortcutInfo.icon;
       icon.className = "icon";
       icon.alt = command.name;
 
-      // Shortcut key combo
+      // Add key combo
       const keyCombo = document.createElement("span");
       keyCombo.className = "key-combo";
-      if (command.shortcut) {
-        keyCombo.textContent = command.shortcut;
-      } else {
-        keyCombo.textContent = "Not set";
+      keyCombo.textContent = command.shortcut || "Not set";
+      if (!command.shortcut) {
         keyCombo.classList.add("not-set");
       }
 
-      // Description
+      // Add description
       const description = document.createElement("span");
       description.className = "description";
-      description.textContent = info.description;
+      description.textContent = shortcutInfo.description;
 
       // Assemble and add to container
       shortcutDiv.appendChild(icon);
       shortcutDiv.appendChild(keyCombo);
       shortcutDiv.appendChild(description);
-      shortcutContainer.appendChild(shortcutDiv);
+      shortcutsContainer.appendChild(shortcutDiv);
     });
-
-    // Add a note about customizing shortcuts
-    const noteDiv = document.createElement("div");
-    noteDiv.style.fontSize = "11px";
-    noteDiv.style.marginTop = "10px";
-    noteDiv.innerHTML =
-      "Customize shortcuts at: <b>chrome://extensions/shortcuts</b>";
-    shortcutContainer.appendChild(noteDiv);
-  } catch (error) {
-    shortcutContainer.innerHTML = `<div>Error loading shortcuts: ${error.message}</div>`;
-    console.error("Error loading shortcuts:", error);
-  }
+  });
 });
