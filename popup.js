@@ -18,7 +18,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         icon: "broom.png",
       },
       close_unpinned: {
-        description: "Close all unpinned tabs",
+        description: "Close all unpinned tabs in current window",
+        icon: "broom.png",
+      },
+      close_all_unpinned: {
+        description: "Close all unpinned tabs across all windows",
         icon: "broom.png",
       },
     };
