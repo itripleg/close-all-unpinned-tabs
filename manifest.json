@@ -29,7 +29,7 @@
       "description": "Close all tabs excepts pinned ones"
     }
   },
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "commands"],
   "icons": {
     "16": "broom.png",
     "32": "broom.png",

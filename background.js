@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Handles keyboard commands for tab management
  */
@@ -52,3 +53,26 @@ async function closeUnpinnedTabs() {
   const tabIds = unpinnedTabs.map((tab) => tab.id);
   await chrome.tabs.remove(tabIds);
 }
+=======
+chrome.commands.onCommand.addListener(function(command) {
+  if (command == "toggle_pin") {
+    // Get the currently selected tab
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      // Toggle the pinned status
+      var current = tabs[0]
+      chrome.tabs.update(current.id, {'pinned': !current.pinned});
+    });
+  }
+  if(command == "close_unpinned"){
+  	//Get all tabs that are unpinned
+  	var allTabs = [];
+
+  	 allTabs = chrome.tabs.query({currentWindow: true, pinned: false}, function(tabs){
+      for(var i =0 ; i < tabs.length; i++){
+        chrome.tabs.remove(tabs[i].id);
+      } 
+
+  	});
+  }
+});
+>>>>>>> 2ab508c2deb9bc5dae042dcc7feddd26bff6ed5c

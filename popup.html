@@ -1,15 +1,74 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <style>
-        button {
-          height: 30px;
-          width: 30px;
-          outline: none;
-        }
-      </style>
-    </head>
-    <body>
-      <button id="changeColor"></button>
-    </body>
-  </html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        width: 300px;
+        padding: 15px;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        font-size: 16px;
+        color: #333;
+        margin-top: 0;
+      }
+      .shortcut-container {
+        margin: 15px 0;
+      }
+      .shortcut {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .key-combo {
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 4px 8px;
+        font-family: monospace;
+        font-size: 12px;
+        min-width: 80px;
+        text-align: center;
+      }
+      .description {
+        margin-left: 10px;
+        color: #555;
+        flex-grow: 1;
+      }
+      .icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        flex-shrink: 0;
+      }
+      footer {
+        font-size: 11px;
+        color: #777;
+        margin-top: 15px;
+        text-align: center;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+      }
+      .not-set {
+        font-style: italic;
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tab Manager Shortcuts</h1>
+
+    <div id="shortcut-container" class="shortcut-container">
+      <!-- Shortcuts will be populated here -->
+      <div class="shortcut">
+        <img src="broom.png" class="icon" alt="Loading..." />
+        <span class="key-combo">Loading...</span>
+        <span class="description">Loading shortcuts...</span>
+      </div>
+    </div>
+
+    <footer>Close All Unpinned Tabs v1.0.0</footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
